@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aaj Bharat News - Ultimate Portal</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
+
+body{
+  color:white;
+  background: linear-gradient(135deg,#120018,#2b0000,#001a2b,#000);
+  background-size:400% 400%;
+  animation:bg 12s infinite alternate;
+}
+
+@keyframes bg{
+  0%{background-position:0%}
+  100%{background-position:100%}
+}
+
+/* BACKGROUND NEWS */
+.bg-news{
+  position:fixed;
+  width:100%;
+  height:100%;
+  z-index:-1;
+  opacity:0.12;
+}
+
+.bg-news span{
+  display:block;
+  margin:50px 0;
+  white-space:nowrap;
+  animation:scroll 25s linear infinite;
+}
+
+@keyframes scroll{
+  0%{transform:translateX(100%)}
+  100%{transform:translateX(-100%)}
+}
+
+/* HEADER */
+header{
+  background:#b30000;
+  padding:15px;
+  display:flex;
+  justify-content:space-between;
+}
+
+/* TICKER */
+.ticker{
+  background:black;
+  color:yellow;
+  padding:10px;
+  overflow:hidden;
+}
+
+.ticker span{
+  display:inline-block;
+  animation:move 12s linear infinite;
+}
+
+@keyframes move{
+  0%{transform:translateX(100%)}
+  100%{transform:translateX(-100%)}
+}
+
+/* FLOAT HEADLINES */
+.float-headlines{
+  position:fixed;
+  top:90px;
+  left:10px;
+  background:black;
+  padding:10px;
+  border-left:3px solid red;
+  font-size:12px;
+}
+
+/* LAYOUT */
+.container{
+  display:flex;
+  gap:20px;
+  padding:20px;
+}
+
+.news{flex:2}
+
+.card{
+  background:rgba(0,0,0,0.6);
+  padding:15px;
+  margin-bottom:15px;
+  border-left:4px solid red;
+  border-radius:10px;
+}
+
+/* SIDEBAR */
+.sidebar{
+  flex:1;
+  background:rgba(0,0,0,0.6);
+  padding:15px;
+  border-radius:10px;
+}
+
+/* AI */
+.ai{
+  position:fixed;
+  bottom:120px;
+  right:20px;
+  background:#111;
+  padding:10px;
+  width:240px;
+  border:1px solid red;
+}
+
+.ai button{
+  width:100%;
+  background:red;
+  border:none;
+  padding:5px;
+  color:white;
+}
+
+/* BULLETIN */
+#bulletinBox{
+  position:fixed;
+  top:150px;
+  right:20px;
+  width:260px;
+}
+
+.bulletin{
+  background:#111;
+  border-left:4px solid red;
+  padding:8px;
+  margin-bottom:8px;
+  font-size:13px;
+}
+
+/* SPONSORS */
+.sponsors{
+  position:fixed;
+  bottom:0;
+  width:100%;
+  background:black;
+  text-align:center;
+  padding:12px;
+  border-top:2px solid red;
+}
+
+/* ================= IMAGE POPUP NEWS SLIDER ================= */
+#imgPopup{
+  position:fixed;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  width:60%;
+  background:#111;
+  border:2px solid red;
+  padding:15px;
+  text-align:center;
+  display:none;
+  z-index:2000;
+}
+
+#imgPopup img{
+  width:100%;
+  border-radius:10px;
+  margin-top:10px;
+}
+
+#imgTitle{
+  font-size:18px;
+  margin-top:5px;
+  color:yellow;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">Aaj Bharat News</div>
+</header>
+
+<div class="ticker">
+<span>Breaking: India News | Market Rise | AI Growth | Politics | World Updates</span>
+</div>
+
+<div class="float-headlines">
+🔥 Modi update<br>
+🔥 Wangchuk strike<br>
+📈 Market boom
+</div>
+
+<div class="container">
+
+<div class="news">
+<div class="card">Modi Political Update</div>
+<div class="card">Sonam Wangchuk Hunger Strike</div>
+<div class="card">Stock Market Surge</div>
+</div>
+
+<div class="sidebar">
+<h3>News Portals</h3>
+<p>BBC</p>
+<p>CNN</p>
+<p>India Today</p>
+</div>
+
+</div>
+
+<!-- BULLETIN -->
+<div id="bulletinBox"></div>
+
+<!-- AI -->
+<div class="ai">
+<b>AI Chancellor</b>
+<p id="aiText">Translate News</p>
+<button onclick="translate()">Translate</button>
+</div>
+
+<!-- SPONSORS -->
+<div class="sponsors">
+Powered by Parle-G | Sponsored by Sumaira Cosmetics | Tata | Reliance
+</div>
+
+<!-- ================= IMAGE POPUP SLIDER ================= -->
+<div id="imgPopup">
+  <div id="imgTitle"></div>
+  <img id="newsImg">
+</div>
+
+<script>
+
+/* ================= BULLETIN STACK ================= */
+let news = [
+"India economy rising 🚀",
+"Modi update trending 🇮🇳",
+"Sonam Wangchuk strike",
+"Stock market high 📈",
+"AI revolution 🤖"
+];
+
+let i=0;
+let box=document.getElementById("bulletinBox");
+
+setInterval(()=>{
+  let div=document.createElement("div");
+  div.className="bulletin";
+  div.innerText=news[i];
+
+  box.appendChild(div);
+
+  if(box.children.length>5){
+    box.removeChild(box.children[0]);
+  }
+
+  i=(i+1)%news.length;
+},3000);
+
+/* ================= AI ================= */
+function translate(){
+  document.getElementById("aiText").innerText =
+  "AI: यह समाचार सरल भाषा में अनुवादित किया गया है।";
+}
+
+/* ================= IMAGE SLIDER POPUP ================= */
+let images=[
+{
+  img:"https://images.unsplash.com/photo-1529070538774-1843cb3265df",
+  title:"Political News Update"
+},
+{
+  img:"https://upload.wikimedia.org/wikipedia/commons/6/6d/Sonam_Wangchuk.jpg",
+  title:"Sonam Wangchuk Hunger Strike"
+},
+{
+  img:"https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3",
+  title:"Stock Market Surge"
+}
+];
+
+let imgIndex=0;
+
+function showImageNews(){
+  let popup=document.getElementById("imgPopup");
+  let img=document.getElementById("newsImg");
+  let title=document.getElementById("imgTitle");
+
+  popup.style.display="block";
+
+  img.src=images[imgIndex].img;
+  title.innerText=images[imgIndex].title;
+
+  imgIndex=(imgIndex+1)%images.length;
+
+  setTimeout(()=>popup.style.display="none",2500);
+}
+
+/* auto image popup every 4 seconds */
+setInterval(showImageNews,4000);
+
+</script>
+
+</body>
+</html>
